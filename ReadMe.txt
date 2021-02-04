@@ -1,0 +1,1 @@
+Project about connecting gym users together
