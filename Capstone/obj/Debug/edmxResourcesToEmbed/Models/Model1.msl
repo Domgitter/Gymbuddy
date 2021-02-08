@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CapstoneModelStoreContainer" CdmEntityContainer="CapstoneEntities">
+    <EntitySetMapping Name="LevelOfFitnesses">
+      <EntityTypeMapping TypeName="CapstoneModel.LevelOfFitness">
+        <MappingFragment StoreEntitySet="LevelOfFitness">
+          <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+          <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exercises">
+      <EntityTypeMapping TypeName="CapstoneModel.Exercise">
+        <MappingFragment StoreEntitySet="Exercise">
+          <ScalarProperty Name="GymID" ColumnName="GymID" />
+          <ScalarProperty Name="Participant" ColumnName="Participant" />
+          <ScalarProperty Name="ExerciseID" ColumnName="ExerciseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExerciseTypes">
+      <EntityTypeMapping TypeName="CapstoneModel.ExerciseType">
+        <MappingFragment StoreEntitySet="ExerciseType">
+          <ScalarProperty Name="ExerciseDescrip" ColumnName="ExerciseDescrip" />
+          <ScalarProperty Name="ExerciseName" ColumnName="ExerciseName" />
+          <ScalarProperty Name="ExerciseTypeID" ColumnName="ExerciseTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserExerciseTypes">
+      <EntityTypeMapping TypeName="CapstoneModel.UserExerciseType">
+        <MappingFragment StoreEntitySet="UserExerciseType">
+          <ScalarProperty Name="LevelID" ColumnName="LevelID" />
+          <ScalarProperty Name="GymID" ColumnName="GymID" />
+          <ScalarProperty Name="ExerciseTypeID" ColumnName="ExerciseTypeID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserExerciseTypeID" ColumnName="UserExerciseTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GymOrPlaces">
+      <EntityTypeMapping TypeName="CapstoneModel.GymOrPlace">
+        <MappingFragment StoreEntitySet="GymOrPlace">
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="GymState" ColumnName="GymState" />
+          <ScalarProperty Name="GymAddress" ColumnName="GymAddress" />
+          <ScalarProperty Name="GymName" ColumnName="GymName" />
+          <ScalarProperty Name="GymID" ColumnName="GymID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GymUsers">
+      <EntityTypeMapping TypeName="CapstoneModel.GymUser">
+        <MappingFragment StoreEntitySet="GymUser">
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="UserState" ColumnName="UserState" />
+          <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NearByZips">
+      <EntityTypeMapping TypeName="CapstoneModel.NearByZip">
+        <MappingFragment StoreEntitySet="NearByZips">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="SearchedZip" ColumnName="SearchedZip" />
+          <ScalarProperty Name="NearByZipsID" ColumnName="NearByZipsID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="FindNearbyUsers" FunctionName="CapstoneModel.Store.FindNearbyUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CapstoneModel.FindNearbyUsers_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+          <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+          <ScalarProperty Name="UserState" ColumnName="UserState" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

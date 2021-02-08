@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Capstone.Models.ExerciseType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    table.content-table{
+        border-collapse:collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        width: 80%
+    }
+    tr th.content-table {
+        background-color: #009879;
+        color: #ffffff;
+        text-align:left;
+        font-weight:bold;
+
+    }
+    tbody tr.content-table:nth-of-type(even){
+        border-bottom: 1px solid #dddddd;
+    }
+
+</style>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="content-table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExerciseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExerciseDescrip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExerciseTypeID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExerciseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExerciseDescrip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExerciseTypeID)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.ExerciseTypeID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ExerciseTypeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ExerciseTypeID })*@
+            @if (ViewContext.HttpContext.User.IsInRole("Admin") || ViewContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.ExerciseTypeID })
+            }
+
+            @Html.ActionLink("Details", "Details", new { id = item.ExerciseTypeID })
+
+            @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.ExerciseTypeID })
+            }
+        </td>
+    </tr>
+}
+
+</table>

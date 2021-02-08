@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CapstoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CapstoneEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="LevelOfFitnesses" EntityType="CapstoneModel.LevelOfFitness" />
+    <EntitySet Name="Exercises" EntityType="CapstoneModel.Exercise" />
+    <EntitySet Name="ExerciseTypes" EntityType="CapstoneModel.ExerciseType" />
+    <EntitySet Name="UserExerciseTypes" EntityType="CapstoneModel.UserExerciseType" />
+    <AssociationSet Name="FK__UserExerc__Exerc__46E78A0C" Association="CapstoneModel.FK__UserExerc__Exerc__46E78A0C">
+      <End Role="ExerciseType" EntitySet="ExerciseTypes" />
+      <End Role="UserExerciseType" EntitySet="UserExerciseTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserExerc__Level__48CFD27E" Association="CapstoneModel.FK__UserExerc__Level__48CFD27E">
+      <End Role="LevelOfFitness" EntitySet="LevelOfFitnesses" />
+      <End Role="UserExerciseType" EntitySet="UserExerciseTypes" />
+    </AssociationSet>
+    <EntitySet Name="GymOrPlaces" EntityType="CapstoneModel.GymOrPlace" />
+    <EntitySet Name="GymUsers" EntityType="CapstoneModel.GymUser" />
+    <AssociationSet Name="FK__Exercise__GymID__398D8EEE" Association="CapstoneModel.FK__Exercise__GymID__398D8EEE">
+      <End Role="GymOrPlace" EntitySet="GymOrPlaces" />
+      <End Role="Exercise" EntitySet="Exercises" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exercise__Partic__38996AB5" Association="CapstoneModel.FK__Exercise__Partic__38996AB5">
+      <End Role="GymUser" EntitySet="GymUsers" />
+      <End Role="Exercise" EntitySet="Exercises" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserExerc__GymID__47DBAE45" Association="CapstoneModel.FK__UserExerc__GymID__47DBAE45">
+      <End Role="GymOrPlace" EntitySet="GymOrPlaces" />
+      <End Role="UserExerciseType" EntitySet="UserExerciseTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserExerc__UserI__45F365D3" Association="CapstoneModel.FK__UserExerc__UserI__45F365D3">
+      <End Role="GymUser" EntitySet="GymUsers" />
+      <End Role="UserExerciseType" EntitySet="UserExerciseTypes" />
+    </AssociationSet>
+    <EntitySet Name="NearByZips" EntityType="CapstoneModel.NearByZip" />
+    <FunctionImport Name="FindNearbyUsers" ReturnType="Collection(CapstoneModel.FindNearbyUsers_Result)">
+      <Parameter Name="SearchZipCode" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="LevelOfFitness">
+    <Key>
+      <PropertyRef Name="LevelID" />
+    </Key>
+    <Property Name="LevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LevelName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserExerciseTypes" Relationship="CapstoneModel.FK__UserExerc__Level__48CFD27E" FromRole="LevelOfFitness" ToRole="UserExerciseType" />
+  </EntityType>
+  <EntityType Name="Exercise">
+    <Key>
+      <PropertyRef Name="ExerciseID" />
+    </Key>
+    <Property Name="ExerciseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Participant" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="GymID" Type="Int32" />
+    <NavigationProperty Name="GymOrPlace" Relationship="CapstoneModel.FK__Exercise__GymID__398D8EEE" FromRole="Exercise" ToRole="GymOrPlace" />
+    <NavigationProperty Name="GymUser" Relationship="CapstoneModel.FK__Exercise__Partic__38996AB5" FromRole="Exercise" ToRole="GymUser" />
+  </EntityType>
+  <EntityType Name="ExerciseType">
+    <Key>
+      <PropertyRef Name="ExerciseTypeID" />
+    </Key>
+    <Property Name="ExerciseTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExerciseName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ExerciseDescrip" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserExerciseTypes" Relationship="CapstoneModel.FK__UserExerc__Exerc__46E78A0C" FromRole="ExerciseType" ToRole="UserExerciseType" />
+  </EntityType>
+  <EntityType Name="UserExerciseType">
+    <Key>
+      <PropertyRef Name="UserExerciseTypeID" />
+    </Key>
+    <Property Name="UserExerciseTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ExerciseTypeID" Type="Int32" Nullable="false" />
+    <Property Name="GymID" Type="Int32" />
+    <Property Name="LevelID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ExerciseType" Relationship="CapstoneModel.FK__UserExerc__Exerc__46E78A0C" FromRole="UserExerciseType" ToRole="ExerciseType" />
+    <NavigationProperty Name="LevelOfFitness" Relationship="CapstoneModel.FK__UserExerc__Level__48CFD27E" FromRole="UserExerciseType" ToRole="LevelOfFitness" />
+    <NavigationProperty Name="GymOrPlace" Relationship="CapstoneModel.FK__UserExerc__GymID__47DBAE45" FromRole="UserExerciseType" ToRole="GymOrPlace" />
+    <NavigationProperty Name="GymUser" Relationship="CapstoneModel.FK__UserExerc__UserI__45F365D3" FromRole="UserExerciseType" ToRole="GymUser" />
+  </EntityType>
+  <Association Name="FK__UserExerc__Exerc__46E78A0C">
+    <End Type="CapstoneModel.ExerciseType" Role="ExerciseType" Multiplicity="1" />
+    <End Type="CapstoneModel.UserExerciseType" Role="UserExerciseType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExerciseType">
+        <PropertyRef Name="ExerciseTypeID" />
+      </Principal>
+      <Dependent Role="UserExerciseType">
+        <PropertyRef Name="ExerciseTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserExerc__Level__48CFD27E">
+    <End Type="CapstoneModel.LevelOfFitness" Role="LevelOfFitness" Multiplicity="1" />
+    <End Type="CapstoneModel.UserExerciseType" Role="UserExerciseType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LevelOfFitness">
+        <PropertyRef Name="LevelID" />
+      </Principal>
+      <Dependent Role="UserExerciseType">
+        <PropertyRef Name="LevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="GymOrPlace">
+    <Key>
+      <PropertyRef Name="GymID" />
+    </Key>
+    <Property Name="GymID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GymName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="GymAddress" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="GymState" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Zip" Type="Int32" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Exercises" Relationship="CapstoneModel.FK__Exercise__GymID__398D8EEE" FromRole="GymOrPlace" ToRole="Exercise" />
+    <NavigationProperty Name="UserExerciseTypes" Relationship="CapstoneModel.FK__UserExerc__GymID__47DBAE45" FromRole="GymOrPlace" ToRole="UserExerciseType" />
+  </EntityType>
+  <EntityType Name="GymUser">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Fname" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Lname" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UserAddress" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserState" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Zip" Type="Int32" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Exercises" Relationship="CapstoneModel.FK__Exercise__Partic__38996AB5" FromRole="GymUser" ToRole="Exercise" />
+    <NavigationProperty Name="UserExerciseTypes" Relationship="CapstoneModel.FK__UserExerc__UserI__45F365D3" FromRole="GymUser" ToRole="UserExerciseType" />
+  </EntityType>
+  <Association Name="FK__Exercise__GymID__398D8EEE">
+    <End Type="CapstoneModel.GymOrPlace" Role="GymOrPlace" Multiplicity="0..1" />
+    <End Type="CapstoneModel.Exercise" Role="Exercise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GymOrPlace">
+        <PropertyRef Name="GymID" />
+      </Principal>
+      <Dependent Role="Exercise">
+        <PropertyRef Name="GymID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exercise__Partic__38996AB5">
+    <End Type="CapstoneModel.GymUser" Role="GymUser" Multiplicity="1" />
+    <End Type="CapstoneModel.Exercise" Role="Exercise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GymUser">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Exercise">
+        <PropertyRef Name="Participant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserExerc__GymID__47DBAE45">
+    <End Type="CapstoneModel.GymOrPlace" Role="GymOrPlace" Multiplicity="0..1" />
+    <End Type="CapstoneModel.UserExerciseType" Role="UserExerciseType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GymOrPlace">
+        <PropertyRef Name="GymID" />
+      </Principal>
+      <Dependent Role="UserExerciseType">
+        <PropertyRef Name="GymID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserExerc__UserI__45F365D3">
+    <End Type="CapstoneModel.GymUser" Role="GymUser" Multiplicity="1" />
+    <End Type="CapstoneModel.UserExerciseType" Role="UserExerciseType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GymUser">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserExerciseType">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="NearByZip">
+    <Key>
+      <PropertyRef Name="NearByZipsID" />
+    </Key>
+    <Property Name="NearByZipsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SearchedZip" Type="Int32" Nullable="false" />
+    <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Distance" Type="Double" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="FindNearbyUsers_Result">
+    <Property Type="String" Name="UserID" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="Fname" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Lname" Nullable="false" MaxLength="25" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="256" />
+    <Property Type="String" Name="Gender" Nullable="false" MaxLength="10" />
+    <Property Type="DateTime" Name="BirthDate" Nullable="false" />
+    <Property Type="String" Name="UserAddress" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="UserState" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Zip" Nullable="false" />
+    <Property Type="String" Name="City" Nullable="true" MaxLength="128" />
+    <Property Type="Double" Name="Distance" Nullable="false" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,44 @@
+﻿@model Capstone.Models.UserExerciseType
+
+<div>
+    <h4>UserExerciseType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ExerciseType.ExerciseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExerciseType.ExerciseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LevelOfFitness.LevelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LevelOfFitness.LevelName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GymOrPlace.GymName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymOrPlace.GymName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GymUser.Fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymUser.Fname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserExerciseTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

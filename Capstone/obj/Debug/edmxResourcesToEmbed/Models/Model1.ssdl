@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CapstoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Exercise">
+    <Key>
+      <PropertyRef Name="ExerciseID" />
+    </Key>
+    <Property Name="ExerciseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Participant" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="GymID" Type="int" />
+  </EntityType>
+  <EntityType Name="ExerciseType">
+    <Key>
+      <PropertyRef Name="ExerciseTypeID" />
+    </Key>
+    <Property Name="ExerciseTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExerciseName" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ExerciseDescrip" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="GymOrPlace">
+    <Key>
+      <PropertyRef Name="GymID" />
+    </Key>
+    <Property Name="GymID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GymName" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="GymAddress" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="GymState" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Zip" Type="int" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="GymUser">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Fname" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Lname" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="BirthDate" Type="date" Nullable="false" />
+    <Property Name="UserAddress" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserState" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Zip" Type="int" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="LevelOfFitness">
+    <Key>
+      <PropertyRef Name="LevelID" />
+    </Key>
+    <Property Name="LevelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LevelName" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="NearByZips">
+    <Key>
+      <PropertyRef Name="NearByZipsID" />
+    </Key>
+    <Property Name="NearByZipsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SearchedZip" Type="int" Nullable="false" />
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Distance" Type="float" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="128" />
+    <Property Name="State" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="UserExerciseType">
+    <Key>
+      <PropertyRef Name="UserExerciseTypeID" />
+    </Key>
+    <Property Name="UserExerciseTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ExerciseTypeID" Type="int" Nullable="false" />
+    <Property Name="GymID" Type="int" />
+    <Property Name="LevelID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Exercise__GymID__398D8EEE">
+    <End Role="GymOrPlace" Type="Self.GymOrPlace" Multiplicity="0..1" />
+    <End Role="Exercise" Type="Self.Exercise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GymOrPlace">
+        <PropertyRef Name="GymID" />
+      </Principal>
+      <Dependent Role="Exercise">
+        <PropertyRef Name="GymID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Exercise__Partic__38996AB5">
+    <End Role="GymUser" Type="Self.GymUser" Multiplicity="1" />
+    <End Role="Exercise" Type="Self.Exercise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GymUser">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Exercise">
+        <PropertyRef Name="Participant" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserExerc__Exerc__46E78A0C">
+    <End Role="ExerciseType" Type="Self.ExerciseType" Multiplicity="1" />
+    <End Role="UserExerciseType" Type="Self.UserExerciseType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExerciseType">
+        <PropertyRef Name="ExerciseTypeID" />
+      </Principal>
+      <Dependent Role="UserExerciseType">
+        <PropertyRef Name="ExerciseTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserExerc__GymID__47DBAE45">
+    <End Role="GymOrPlace" Type="Self.GymOrPlace" Multiplicity="0..1" />
+    <End Role="UserExerciseType" Type="Self.UserExerciseType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GymOrPlace">
+        <PropertyRef Name="GymID" />
+      </Principal>
+      <Dependent Role="UserExerciseType">
+        <PropertyRef Name="GymID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserExerc__Level__48CFD27E">
+    <End Role="LevelOfFitness" Type="Self.LevelOfFitness" Multiplicity="1" />
+    <End Role="UserExerciseType" Type="Self.UserExerciseType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LevelOfFitness">
+        <PropertyRef Name="LevelID" />
+      </Principal>
+      <Dependent Role="UserExerciseType">
+        <PropertyRef Name="LevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserExerc__UserI__45F365D3">
+    <End Role="GymUser" Type="Self.GymUser" Multiplicity="1" />
+    <End Role="UserExerciseType" Type="Self.UserExerciseType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GymUser">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="UserExerciseType">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="FindNearbyUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SearchZipCode" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="CapstoneModelStoreContainer">
+    <EntitySet Name="Exercise" EntityType="Self.Exercise" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExerciseType" EntityType="Self.ExerciseType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GymOrPlace" EntityType="Self.GymOrPlace" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GymUser" EntityType="Self.GymUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LevelOfFitness" EntityType="Self.LevelOfFitness" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NearByZips" EntityType="Self.NearByZips" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserExerciseType" EntityType="Self.UserExerciseType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Exercise__GymID__398D8EEE" Association="Self.FK__Exercise__GymID__398D8EEE">
+      <End Role="GymOrPlace" EntitySet="GymOrPlace" />
+      <End Role="Exercise" EntitySet="Exercise" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Exercise__Partic__38996AB5" Association="Self.FK__Exercise__Partic__38996AB5">
+      <End Role="GymUser" EntitySet="GymUser" />
+      <End Role="Exercise" EntitySet="Exercise" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserExerc__Exerc__46E78A0C" Association="Self.FK__UserExerc__Exerc__46E78A0C">
+      <End Role="ExerciseType" EntitySet="ExerciseType" />
+      <End Role="UserExerciseType" EntitySet="UserExerciseType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserExerc__GymID__47DBAE45" Association="Self.FK__UserExerc__GymID__47DBAE45">
+      <End Role="GymOrPlace" EntitySet="GymOrPlace" />
+      <End Role="UserExerciseType" EntitySet="UserExerciseType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserExerc__Level__48CFD27E" Association="Self.FK__UserExerc__Level__48CFD27E">
+      <End Role="LevelOfFitness" EntitySet="LevelOfFitness" />
+      <End Role="UserExerciseType" EntitySet="UserExerciseType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserExerc__UserI__45F365D3" Association="Self.FK__UserExerc__UserI__45F365D3">
+      <End Role="GymUser" EntitySet="GymUser" />
+      <End Role="UserExerciseType" EntitySet="UserExerciseType" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

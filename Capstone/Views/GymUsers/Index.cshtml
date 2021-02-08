@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Capstone.Models.FindNearbyUsers_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    th {
+        text-align: left;
+        border-bottom: solid;
+    }
+</style>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" style="width: 80%">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zip)
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+<tr class="link-row" onclick="goDetails('@item.UserID')">
+    <td>
+        @Html.DisplayFor(modelItem => item.Fname)
+
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Age)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.City)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.UserState)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Zip)
+    </td>
+
+</tr>
+}
+
+</table>
+@section scripts{
+    <script>
+        function goDetails(id)
+        {
+            let url = '/GymUsers/details/' + id
+            location.href = url
+
+        }
+    </script>
+    }

@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNet.Identity;
+@model IEnumerable<Capstone.Models.UserExerciseType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if(ViewBag.UserID == User.Identity.GetUserId())
+{ 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+}
+
+<table class="table" style="width:50%">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExerciseType.ExerciseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GymOrPlace.GymName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GymUser.Fname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LevelOfFitness.LevelName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExerciseType.ExerciseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GymOrPlace.GymName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GymUser.Fname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LevelOfFitness.LevelName)
+        </td>
+        <td>
+            
+            @if (ViewBag.UserID == User.Identity.GetUserId())
+            {
+                <text>
+                @Html.ActionLink("Edit", "Edit", new { id = item.UserExerciseTypeID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserExerciseTypeID })
+                </text>
+            }
+
+        </td>
+    </tr>
+}
+
+</table>

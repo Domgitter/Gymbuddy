@@ -1,0 +1,34 @@
+﻿@model Capstone.Models.Exercise
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Exercise</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GymOrPlace.GymName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymOrPlace.GymName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GymUser.Fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymUser.Fname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ExerciseID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

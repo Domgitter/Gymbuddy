@@ -1,0 +1,63 @@
+﻿@model Capstone.Models.GymOrPlace
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>GymOrPlace</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GymName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GymAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GymState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zip)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

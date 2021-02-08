@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="963aa656cb1d4f06a66695a65aa7b6f6" Name="Diagram1" >
+        <EntityTypeShape EntityType="CapstoneModel.LevelOfFitness" Width="1.5" PointX="5.25" PointY="5.75" />
+        <EntityTypeShape EntityType="CapstoneModel.Exercise" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="CapstoneModel.ExerciseType" Width="1.5" PointX="5.25" PointY="2.5" />
+        <EntityTypeShape EntityType="CapstoneModel.UserExerciseType" Width="1.5" PointX="7.5" PointY="3" />
+        <AssociationConnector Association="CapstoneModel.FK__UserExerc__Exerc__46E78A0C" />
+        <AssociationConnector Association="CapstoneModel.FK__UserExerc__Level__48CFD27E" />
+        <EntityTypeShape EntityType="CapstoneModel.GymOrPlace" Width="1.5" PointX="0.5" PointY="6.5" />
+        <EntityTypeShape EntityType="CapstoneModel.GymUser" Width="1.5" PointX="0.5" PointY="2.25" />
+        <AssociationConnector Association="CapstoneModel.FK__Exercise__GymID__398D8EEE" />
+        <AssociationConnector Association="CapstoneModel.FK__Exercise__Partic__38996AB5" />
+        <AssociationConnector Association="CapstoneModel.FK__UserExerc__GymID__47DBAE45" />
+        <AssociationConnector Association="CapstoneModel.FK__UserExerc__UserI__45F365D3" />
+        <EntityTypeShape EntityType="CapstoneModel.NearByZip" Width="1.5" PointX="7.375" PointY="6.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

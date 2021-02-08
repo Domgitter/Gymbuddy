@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Capstone.Models.GymOrPlace>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    th{
+        text-align:left;
+        border-bottom:solid;
+    }
+</style>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" style="width:80%">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GymName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GymAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GymState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zip)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.GymName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GymAddress)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.City)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GymState)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Zip)
+    </td>
+    <td>
+        @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = item.GymID })
+        }
+
+        @Html.ActionLink("Details", "Details", new { id = item.GymID })
+
+        @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Delete", "Delete", new { id = item.GymID })
+        }
+
+    </td>
+</tr>
+}
+
+</table>

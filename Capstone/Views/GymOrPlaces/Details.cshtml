@@ -1,0 +1,112 @@
+﻿@model Capstone.Models.GymOrPlace
+
+@{
+    ViewBag.Title = "Details";
+
+    
+
+}
+<style>
+    th {
+        text-align: left;
+        border-bottom: solid;
+    }
+</style>
+
+<h2>Details</h2>
+
+<div>
+    <h4>Gym or Place</h4>
+    <hr />
+
+    <table style="width:80%">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GymName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GymAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GymState)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Zip)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.GymName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.GymAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.City)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.GymState)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Zip)
+            </td>
+
+        </tr>
+
+    </table>
+    @*<dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GymName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GymAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GymState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GymState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zip)
+        </dd>
+
+    </dl>*@
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GymID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@{ 
+    
+
+
+    var mapSrc = "https://www.google.com/maps/embed/v1/place?key=" + ViewBag.mapKey + "&q=" + HttpUtility.UrlEncode(Model.GymAddress +"," + Model.City + "," + Model.GymState + "," + Model.Zip);
+}
+<div>
+    <iframe width="600"
+            height="450"
+            frameborder="0" style="border:0"
+            src=@mapSrc allowfullscreen>
+    </iframe>
+</div>
